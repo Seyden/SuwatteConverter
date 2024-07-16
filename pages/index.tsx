@@ -14,14 +14,9 @@ export default function Home() {
           Convert my backup to
         </p>
         <div className="flex-row pb-4">
-          <Link href="/cubari">
+          <Link href="/suwatte">
             <button className="border-solid border-2 text-lg border-white p-2 rounded-md cursor-pointer hover:bg-white hover:text-black duration-200 mx-2">
-              Cubari
-            </button>
-          </Link>
-          <Link href="/aidoku">
-            <button className="border-solid border-2 text-lg border-white p-2 rounded-md cursor-pointer hover:bg-white hover:text-black duration-200 mx-2">
-              Aidoku
+              Suwatte
             </button>
           </Link>
         </div>
@@ -29,19 +24,13 @@ export default function Home() {
       <div className="inline-flex flex-col justify-center items-center mt-10">
         <ul className="flex items-center">
           <SocialButton
-            name="github"
-            url="https://github.com/bdashore3/cubari-importer"
-            color="hover:text-orange-400"
-            svgPath={SocialImages.Github}
-          />
-          <SocialButton
             name="discord"
-            url="https://kingbri.dev/discord"
+            url="https://discordapp.com/users/197818400196657152"
             color="hover:text-blurple"
             svgPath={SocialImages.Discord}
           />
         </ul>
-        <footer className="py-6 text-center max-w-screen">© 2022 Brian Dashore, pandeynmn</footer>
+        <footer className="py-6 text-center max-w-screen">© 2024 Suwatte Converter by Seyden, Website by Brian Dashore</footer>
       </div>
     </div>
   )

@@ -1,2 +1,1 @@
-export { default as toAidoku } from './toAidoku'
-export { default as toCubari } from './toCubari'
+export { default as toSuwatte } from './toSuwatte'

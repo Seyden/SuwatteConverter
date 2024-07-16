@@ -1,56 +1,40 @@
 export type PBBackup = {
-  library: Library[]
-  sourceMangas: SourceMangas[]
-  chapterMarkers: ChapterMarker[]
-  backupSchemaVersion: number
-  date: number
-  tabs: any[]
-  version: string
-  sourceRepositories: SourceRepository[]
-  activeSources: ActiveSource[]
+  libraryMangas: LibraryManga[]
+  sourceMangas: SourceManga[]
+  chapterProgressMarkers: ChapterProgressMarker[]
+  chapters: Chapter[]
+  mangaInfos: MangaInfo[]
 }
-
-export interface ActiveSource {
-  author: string
-  desc: string
-  website: string
-  id: string
-  tags: ActiveSourceTag[]
-  repo: string
-  websiteBaseURL: string
-  version: string
-  icon: string
-  name: string
-}
-
-export interface ActiveSourceTag {
-  type: string
-  text: string
-}
-
-export interface Library {
-  lastRead: number
-  manga: Manga
+export interface LibraryManga {
+  primarySource: SourceMangaReference
   lastUpdated: number
+  libraryTabs: LibraryTabs[]
+  id: string
+  secondarySources: SourceMangaReference[]
+  lastRead: number
+  // Tracked Sources
   dateBookmarked: number
-  libraryTabs: any[]
-  updates: number
 }
 
-export interface Manga {
+export interface LibraryTabs {
   id: string
+  name: string
+  sortOrder: number
+}
+
+export interface MangaInfo {
+  id: string // -> id
   rating?: number
-  covers: any[]
-  author: string
-  tags: MangaTag[]
-  desc: string
-  titles: string[]
-  image: string
+  covers: any[] // -> additionalcovers
+  author: string // -> creators
+  status: string // -> status
+  titles: string[] // -> title -> additionalTitles
+  artist: string // -> creators
+  hentai: boolean // -> isNSFW
+  image: string // -> cover
   additionalInfo: AdditionalInfo
-  hentai: boolean
-  artist: string
-  status: string
-  banner?: string
+  desc: string // -> summary
+  tags: MangaTag[]
 }
 
 export interface AdditionalInfo {
@@ -65,45 +49,55 @@ export interface AdditionalInfo {
 export interface MangaTag {
   id: string
   label: string
-  tags: TagTag[]
+  tags: Tag[]
 }
 
-export interface TagTag {
+export interface Tag {
   id: string
-  value: string
+  label: string
 }
 
-export interface SourceMangas {
+export interface SourceManga {
+  id: string
   mangaId: string
-  id: string
-  manga: Manga
-  originalInfo: Manga
   sourceId: string
+  mangaInfo: MangaInfoReference
 }
 
-export interface SourceRepository {
-  name: string
-  url: string
+export interface MangaInfoReference {
+  type: string
+  id: string
 }
 
-export interface ChapterMarker {
+export interface ChapterProgressMarker {
   totalPages: number
   lastPage: number
-  chapter: Chapter
+  chapter: ChapterReference
   completed: boolean
   time: number
   hidden: boolean
 }
 
+export interface ChapterReference {
+  type: string
+  id: string
+}
+
 export interface Chapter {
+  chapterId: string
   chapNum: number
-  mangaId: string
   volume: number
   id: string
   time: number
   sortingIndex: number
-  sourceId: string
+  sourceManga: SourceMangaReference
+  isNew: boolean
   group: string
   langCode: string
   name: string
+}
+
+export interface SourceMangaReference {
+  type: string
+  id: string
 }

@@ -1,16 +1,14 @@
 import dynamic from 'next/dynamic'
 import SocialButton from '@/components/socialButton'
 import SocialImages from '@/public/socialImages'
-import AidokuWrapper from '@/components/aidokuWrapper'
+import SuwatteWrapper from '@/components/suwatteWrapper'
 import Link from 'next/link'
-
-const RSComponent = dynamic(() => import('../components/cubariWrapper'), { ssr: false })
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen items-center">
       <p className="py-10 md:py-0 font-header text-center text-4xl lg:text-6xl lg:leading-relaxed font-bold tracking-wide mb-10">
-        Aidoku Converter
+        Suwatte Converter
       </p>
       <div className="bg-lightbg md:max-w-3xl xl:max-w-4xl rounded-xl px-6 lg:px-10 py-6">
         <p className="text-red-500 text-left my-3">
@@ -18,7 +16,7 @@ export default function Home() {
           output.
         </p>
         <div className="">
-          <AidokuWrapper />
+          <SuwatteWrapper />
         </div>
       </div>
       <div className="inline-flex flex-col justify-center items-center mt-5">
@@ -30,19 +28,19 @@ export default function Home() {
         <ul className="flex items-center pt-4">
           <SocialButton
             name="github"
-            url="https://github.com/bdashore3/cubari-importer"
+            url="https://github.com/Seyden"
             color="hover:text-orange-400"
             svgPath={SocialImages.Github}
           />
           <SocialButton
             name="discord"
-            url="https://discord.gg/pswt7by"
+            url="https://discordapp.com/users/197818400196657152"
             color="hover:text-blurple"
             svgPath={SocialImages.Discord}
           />
         </ul>
         <footer className="py-6 text-center max-w-screen">
-          © 2022 Brian Dashore, pandeynmn, skittyblock
+          © 2024 Suwatte Converter by Seyden, Website by Brian Dashore
         </footer>
       </div>
     </div>
