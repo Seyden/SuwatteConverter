@@ -41,8 +41,10 @@ If you have issues with the website:
 
 We try to make comments/commits as detailed as possible, but if you don't understand something, please contact either of the developers down below. The best avenue for help is the support discord.
 
-Creators/Developers: Brian Dashore, pandeynmn
+Creator: Brian Dashore
 
-Join the support discord here: [https://kingbri.dev/discord](https://kingbri.dev/discord)
+Developer: Seyden
 
-Kingbri's contact page: [https://kingbri.me/socials](https://kingbri.me/socials)
+Contact me on discord here: [Seyden](https://discordapp.com/users/197818400196657152)
+
+or on Suwatte Discord: [Suwatte](https://discord.gg/8wmkXsT6h5)
