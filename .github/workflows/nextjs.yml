@@ -78,7 +78,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          branch: gh-pages
+          path: out
 
   # Deployment job
   deploy:
