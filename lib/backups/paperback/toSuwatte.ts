@@ -65,7 +65,7 @@ export default async function toSuwatte(files: File[], setConsoleOutput: (consol
   const suwatteBackup: SuwatteBackup = {
     library: [],
     storedContents: [],
-    markers: [],
+    progressMarkers: [],
     collections: [],
     chapters: [],
     contentLinks: [],
@@ -185,7 +185,7 @@ export default async function toSuwatte(files: File[], setConsoleOutput: (consol
       volume: volume == 0 ? undefined : volume
     }
 
-    suwatteBackup.markers!.push({
+    suwatteBackup.progressMarkers!.push({
       dateRead: item.hidden ? undefined : new Date((item.time + 978307200) * 1000),
       id: finalChapterId,
       lastPageOffsetPCT: undefined,

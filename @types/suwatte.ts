@@ -1,7 +1,7 @@
 export type SuwatteBackup = {
   library?: LibraryEntry[]
   storedContents?: StoredContent[]
-  markers?: ProgressMarker[]
+  progressMarkers?: ProgressMarker[]
   collections?: LibraryCollection[]
   chapters?: StoredChapter[]
   contentLinks?: ContentLink[]
