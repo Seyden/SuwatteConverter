@@ -8,6 +8,10 @@ interface SuwatteResult {
   dateString: string;
 }
 
+Date.prototype.toJSON = function () {
+    return this.toISOString().slice(0,-5)+"Z"
+}
+
 export default function SuwatteWrapper() {
   const [conversionSuccess, setConversionSuccess] = useState<boolean>(false)
   const [suwatteJson, setSuwatteJson] = useState<string>('{}')
