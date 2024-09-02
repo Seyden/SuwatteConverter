@@ -167,7 +167,7 @@ export default async function toSuwatte(files: File[], setConsoleOutput: (consol
       volume: item.volume,
     })*/
 
-    paperbackChapterIdToContentSet[item.id] = [content, item.chapterId, item.chapNum, item.volume]
+    paperbackChapterIdToContentSet[item.id] = [content, item.chapterId, item.chapNum == "nan" ? item.sortingIndex : item.chapNum as number, item.volume]
   }
 
   for (const item of pbObj.chapterProgressMarkers) {

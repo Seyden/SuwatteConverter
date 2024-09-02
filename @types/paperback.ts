@@ -85,7 +85,7 @@ export interface ChapterReference {
 
 export interface Chapter {
   chapterId: string
-  chapNum: number
+  chapNum: number | string
   volume: number
   id: string
   time: number
