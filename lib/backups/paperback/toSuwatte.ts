@@ -153,7 +153,7 @@ export default async function toSuwatte(files: File[], setConsoleOutput: (consol
       continue
     }
 
-    let finalChapterId = `${content.sourceId}||${content.contentId}||${item.chapterId}`
+    /*let finalChapterId = `${content.sourceId}||${content.contentId}||${item.chapterId}`
     suwatteBackup.chapters!.push({
       id: finalChapterId,
       chapterId: item.chapterId,
@@ -165,7 +165,7 @@ export default async function toSuwatte(files: File[], setConsoleOutput: (consol
       number: item.chapNum,
       title: item.name,
       volume: item.volume,
-    })
+    })*/
 
     paperbackChapterIdToContentSet[item.id] = [content, item.chapterId, item.chapNum, item.volume]
   }
