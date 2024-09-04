@@ -62,9 +62,9 @@ export interface StoredContent {
   contentId: string
   title: string
   summary: string
-  additionalTitles: string[]
+  additionalTitles?: string[]
   cover: string
-  additionalCovers: string[]
+  additionalCovers?: string[]
   creators: string[]
   status: number
   isNSFW: boolean

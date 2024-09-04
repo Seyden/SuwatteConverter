@@ -1,7 +1,9 @@
 import { ChangeEvent, useEffect, useState, useRef } from 'react'
 import * as Paperback from '@/lib/backups/paperback/Paperback'
+import * as Aidoku from '@/lib/backups/aidoku/Aidoku'
 import { unzipSync } from 'fflate'
 import { SuwatteBackup } from '@/@types/suwatte'
+import { parse } from '@/lib/plist/binary.parse'
 
 interface SuwatteResult {
   backup: SuwatteBackup;
@@ -60,7 +62,7 @@ export default function SuwatteWrapper() {
         return
       }
 
-      let backupResult: SuwatteResult;
+      let backupResult: SuwatteResult | null;
       if (event.target.id === 'uploadPaperback') {
         const zipBuffer = new Uint8Array(e.target.result as ArrayBuffer);
         const unzipped = unzipSync(zipBuffer)
@@ -70,6 +72,13 @@ export default function SuwatteWrapper() {
         backupResult = await Paperback.toSuwatte(fileArray, setConsoleOutput)
 
         setSuwatteJson(JSON.stringify(backupResult.backup))
+      } else if (event.target.id == 'uploadAidoku') {
+        const buffer = e.target.result as ArrayBuffer;
+        const dict = parse(buffer);
+        backupResult = await Aidoku.toSuwatte(dict, setConsoleOutput);
+        if (backupResult) {
+          setSuwatteJson(JSON.stringify(backupResult.backup))
+        }
       } else {
         setConsoleOutput((consoleOutput) => [
           ...consoleOutput,
@@ -77,16 +86,18 @@ export default function SuwatteWrapper() {
         ])
         return
       }
-      setNewBackupName(`Suwatte-${backupResult.dateString}.json`)
+      if (backupResult) {
+        setNewBackupName(`Suwatte-${backupResult.dateString}.json`)
 
-      setConsoleOutput((consoleOutput) => [
-        ...consoleOutput,
-        '> Conversion successful.',
-        `  Your new backup name is: Suwatte-${backupResult.dateString}.json`
-      ])
+        setConsoleOutput((consoleOutput) => [
+          ...consoleOutput,
+          '> Conversion successful.',
+          `  Your new backup name is: Suwatte-${backupResult.dateString}.json`
+        ])
 
-      getBlobLink()
-      setConversionSuccess(true)
+        getBlobLink()
+        setConversionSuccess(true)
+      }
     }
 
     fr.readAsArrayBuffer(event.target.files[0])
@@ -113,6 +124,18 @@ export default function SuwatteWrapper() {
           accept=".pas4"
           className="hidden"
           onChange={fileChanged}
+        />
+        <label
+            htmlFor="uploadAidoku"
+            className="border-solid border-2 text-lg border-red-300 p-2 rounded-md cursor-pointer hover:bg-red-300 hover:text-black duration-200 m-2">
+          <strong>Aidoku</strong>
+        </label>
+        <input
+            type="file"
+            id="uploadAidoku"
+            accept=".aib"
+            className="hidden"
+            onChange={fileChanged}
         />
       </div>
       <h1 className="text-2xl pt-8">Console</h1>
