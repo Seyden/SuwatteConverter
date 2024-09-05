@@ -87,12 +87,13 @@ export default function SuwatteWrapper() {
         return
       }
       if (backupResult) {
-        setNewBackupName(`Suwatte-${backupResult.dateString}.json`)
+        const dateString = backupResult.dateString
+        setNewBackupName(`Suwatte-${dateString}.json`)
 
         setConsoleOutput((consoleOutput) => [
           ...consoleOutput,
           '> Conversion successful.',
-          `  Your new backup name is: Suwatte-${backupResult.dateString}.json`
+          `  Your new backup name is: Suwatte-${dateString}.json`
         ])
 
         getBlobLink()
