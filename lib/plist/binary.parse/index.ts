@@ -60,7 +60,7 @@ function readInt32(buffer: ArrayBuffer, start = 0) {
 }
 
 function readInt64(buffer: ArrayBuffer, start = 0) {
-    return new DataView(buffer).getBigInt64(start, false);
+    return Number(new DataView(buffer).getBigInt64(start, false));
 }
 
 function readInt(buffer: ArrayBuffer) {
