@@ -2,6 +2,7 @@
 const nextConfig = {
     output: "export",  // <=== enables static exports
     reactStrictMode: true,
+    experimental: { esmExternals: true },
     transpilePackages: ['seyden-bplist-parser'],
     webpack(config) {
         config.resolve.fallback = {
