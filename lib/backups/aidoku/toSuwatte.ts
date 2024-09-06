@@ -1,7 +1,6 @@
 import { SuwatteBackup, ChapterReference, StoredContent, LibraryEntry } from '@/@types/suwatte'
 import { AidokuBackup } from '@/@types/aidoku'
 import { SetStateAction } from 'react'
-import { Value } from '@plist/common'
 import { v4 as uuid } from 'uuid'
 
 interface SuwatteResult {
