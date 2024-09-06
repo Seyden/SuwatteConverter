@@ -3,7 +3,9 @@ import * as Paperback from '@/lib/backups/paperback/Paperback'
 import * as Aidoku from '@/lib/backups/aidoku/Aidoku'
 import { unzipSync } from 'fflate'
 import { SuwatteBackup } from '@/@types/suwatte'
-import { parse } from '@/lib/plist/binary.parse'
+import { AidokuBackup } from '@/@types/aidoku'
+
+const bplist = require('seyden-bplist-parser')
 
 interface SuwatteResult {
   backup: SuwatteBackup;
@@ -74,7 +76,7 @@ export default function SuwatteWrapper() {
         setSuwatteJson(JSON.stringify(backupResult.backup))
       } else if (event.target.id == 'uploadAidoku') {
         const buffer = e.target.result as ArrayBuffer;
-        const dict = parse(buffer);
+        const dict = bplist.parseBuffer(Buffer.from(buffer))[0] as unknown as AidokuBackup
         backupResult = await Aidoku.toSuwatte(dict, setConsoleOutput);
         if (backupResult) {
           setSuwatteJson(JSON.stringify(backupResult.backup))

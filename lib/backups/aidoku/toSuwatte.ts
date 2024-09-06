@@ -10,27 +10,26 @@ interface SuwatteResult {
 }
 
 export default async function toSuwatte(
-  dictionary: Value,
+  aidokuObj: AidokuBackup,
   setConsoleOutput: (consoleOutput: SetStateAction<string[]>) => void
 ): Promise<SuwatteResult | null> {
-  let aidokuObj: AidokuBackup = dictionary as unknown as AidokuBackup
   if (!aidokuObj) return null
 
   setConsoleOutput((consoleOutput) => [
     ...consoleOutput,
-    `> Found ${aidokuObj.history.length} History Items`
+    `> Found ${aidokuObj.history?.length} History Items`
   ])
   setConsoleOutput((consoleOutput) => [
     ...consoleOutput,
-    `> Found ${aidokuObj.chapters.length} Chapters`
+    `> Found ${aidokuObj.chapters?.length} Chapters`
   ])
   setConsoleOutput((consoleOutput) => [
     ...consoleOutput,
-    `> Found ${aidokuObj.library.length} Library Items`
+    `> Found ${aidokuObj.library?.length} Library Items`
   ])
   setConsoleOutput((consoleOutput) => [
     ...consoleOutput,
-    `> Found ${aidokuObj.manga.length} Manga Infos`
+    `> Found ${aidokuObj.manga?.length} Manga Infos`
   ])
   setConsoleOutput((consoleOutput) => [
     ...consoleOutput,
