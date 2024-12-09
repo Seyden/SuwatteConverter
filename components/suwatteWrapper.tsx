@@ -1,9 +1,11 @@
 import { ChangeEvent, useEffect, useState, useRef } from 'react'
 import * as Paperback from '@/lib/backups/paperback/Paperback'
 import * as Aidoku from '@/lib/backups/aidoku/Aidoku'
-import { unzipSync } from 'fflate'
+import * as Mihon from '@/lib/backups/mihon/Mihon'
+import { unzipSync, gunzipSync, Gunzip } from 'fflate'
 import { SuwatteBackup } from '@/@types/suwatte'
 import { AidokuBackup } from '@/@types/aidoku'
+import { MihonObjectModel } from '@/@types/mihon'
 
 const bplist = require('seyden-bplist-parser')
 
@@ -55,7 +57,7 @@ export default function SuwatteWrapper() {
 
     let fr = new FileReader()
 
-    fr.onload = async (e) => {
+    fr.onload = async (e: ProgressEvent<FileReader>) => {
       if (e.target == null) {
         setConsoleOutput((consoleOutput) => [
           ...consoleOutput,
@@ -78,6 +80,25 @@ export default function SuwatteWrapper() {
         const buffer = e.target.result as ArrayBuffer;
         const dict = bplist.parseBuffer(Buffer.from(buffer))[0] as unknown as AidokuBackup
         backupResult = await Aidoku.toSuwatte(dict, setConsoleOutput);
+        if (backupResult) {
+          setSuwatteJson(JSON.stringify(backupResult.backup))
+        }
+      } else if (event.target.id == 'uploadMihon') {
+        const buffer = e.target.result as ArrayBuffer;
+        const zipBuffer = new Uint8Array(buffer);
+        const unzipped = gunzipSync(zipBuffer)
+        var decodedData
+        try {
+          decodedData = MihonObjectModel.Backup.decode(unzipped)
+        }
+        catch {
+          setConsoleOutput((consoleOutput) => [
+            ...consoleOutput,
+            '> ERROR: Something went wrong when parsing your backup, try uploading again.'
+          ])
+          return
+        }
+        backupResult = await Mihon.toSuwatte(decodedData, setConsoleOutput)
         if (backupResult) {
           setSuwatteJson(JSON.stringify(backupResult.backup))
         }
@@ -137,6 +158,18 @@ export default function SuwatteWrapper() {
             type="file"
             id="uploadAidoku"
             accept=".aib"
+            className="hidden"
+            onChange={fileChanged}
+        />
+        <label
+            htmlFor="uploadMihon"
+            className="border-solid border-2 text-lg border-red-300 p-2 rounded-md cursor-pointer hover:bg-red-300 hover:text-black duration-200 m-2">
+          <strong>Mihon/Tachiyomi</strong>
+        </label>
+        <input
+            type="file"
+            id="uploadMihon"
+            accept=".tachibk"
             className="hidden"
             onChange={fileChanged}
         />
